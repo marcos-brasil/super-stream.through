@@ -1,5 +1,5 @@
 {
-  "name": "super-stream",
+  "name": "super-stream-through",
   "version": "0.0.0",
   "description": "Transform stream utilities",
   "main": "through.js",
@@ -19,9 +19,6 @@
   "author": "me",
   "license": "MIT",
   "dependencies": {
-    "lodash.defaults": "^2.4.1",
-    "lodash.isfunction": "^2.4.1",
-    "through2": "^0.4.1"
   },
   "devDependencies": {
     "chai": "^1.9.1",
