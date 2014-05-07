@@ -19,6 +19,7 @@
   "author": "me",
   "license": "MIT",
   "dependencies": {
+    "through2": "^0.4.1"
   },
   "devDependencies": {
     "chai": "^1.9.1",
@@ -29,6 +30,7 @@
     "gulp-util": "^2.2.14",
     "istanbul": "^0.2.8",
     "mocha": "^1.18.2",
+    "readable-stream": "^1.0.27-1",
     "sinon": "^1.9.1",
     "sinon-chai": "^2.5.0"
   }

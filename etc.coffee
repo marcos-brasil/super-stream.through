@@ -5,6 +5,7 @@
  * @desc some helper functions
  ###
 
+path = require "path"
 {exec} = require "child_process"
 {Promise} = require "es6-promise"
 
@@ -44,7 +45,7 @@ shell = (cmd) ->
  ###
 mocha =  (spec) ->
   ->
-    cmd = "./node_modules/mocha/bin/mocha --compilers coffee:coffee-script/register #{spec} -R spec -t 1000"
+    cmd = "./node_modules/mocha/bin/mocha  --compilers coffee:coffee-script/register #{spec} -R spec -t 1000 "
     shell cmd
       .catch (err) ->
         throw new Error err
@@ -60,6 +61,8 @@ istanbul = (spec) ->
   spec = replaceExtension spec, ".js"
   ->
     cmd = "./node_modules/istanbul/lib/cli.js cover --report html ./node_modules/mocha/bin/_mocha -- #{spec} -R dot -t 1000"
+    log "shell running istanbul"
+    
     shell cmd
       .catch (err) ->
         throw new Error err
@@ -67,7 +70,8 @@ istanbul = (spec) ->
         console.log "Istanbul coverage summary:"
         console.log "==========================\n"
         console.log str.split('\n')[7..10].join('\n')
-        console.log "\n#{str.split('\n')[15].split(' ')[4].split('')[1..-2].join('')}/index.html"
+        fpath = "#{str.split('\n')[-3..-3].join('').split(' ')[4].split('')[1..-2].join('')}/index.html"
+        console.log "\nopen:", "./#{path.relative process.cwd(), fpath}"
 
 ###*
  * @type Function

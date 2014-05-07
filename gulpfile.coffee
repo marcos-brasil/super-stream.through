@@ -13,7 +13,7 @@ through = require './through'
 {mocha, istanbul, reboot} = require "./etc"
 
 SRC = "./through.coffee"
-SPEC = "./spec.coffee"
+SPEC = "./{spec,fixture}.coffee"
 
 gulp.task "compile:coffee", -> 
   gulp.src [SRC, SPEC]
