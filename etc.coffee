@@ -165,12 +165,18 @@ compileDoc = (src) ->
     inverseNav: no
   }
 
+  config =
+    plugins: ['plugins/markdown']
+    markdown: 
+      parser: 'gfm'
+      hardwrap: yes
+
   -> 
     gulp.src replaceExtension(src, '.js')
       .pipe through.obj (f,e,n) ->
         f.contents = new Buffer f.contents.toString().replace(/\\#/g,'#').replace('\*#', '##')
         n null, f
-      .pipe jsdoc.parser {plugins: ['plugins/markdown']}
+      .pipe jsdoc.parser config
       .pipe jsdoc.generator 'jsdoc'
 
 ###*

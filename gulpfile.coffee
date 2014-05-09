@@ -32,6 +32,6 @@ gulp.task "compile", compile
 
 gulp.task "watch", ["compile", "server"], ->
   gulp.watch ["./gulpfile.coffee", ETC], reboot
-  gulp.watch [SRC, SPEC, FIXTURE], (evt) -> 
+  gulp.watch [SRC, SPEC, FIXTURE], (evt) -> compile(); test()
 
 gulp.task "default", ["compile", "test"]
