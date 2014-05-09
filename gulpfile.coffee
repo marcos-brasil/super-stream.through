@@ -4,35 +4,34 @@
  * @desc gulpfile for through
  ###
 
-coffee = require "gulp-coffee"
 gulp = require "gulp"
-{colors, log} = require "gulp-util"
+{colors, log, replaceExtension} = require "gulp-util"
 {bold, red} = colors
 
 through = require './through'
-{mocha, istanbul, reboot} = require "./etc"
+{mocha, istanbul, reboot, server, jsdoc, coffee} = require "./etc"
 
 SRC = "./through.coffee"
-SPEC = "./{spec,fixture}.coffee"
+SPEC = "./spec.coffee"
+FIXTURE = "./fixture.coffee"
+ETC = "./etc.coffee"
 
-gulp.task "compile:coffee", -> 
-  gulp.src [SRC, SPEC]
-    .pipe coffee {bare: yes}
-    .pipe gulp.dest('.')
-
-gulp.task "compile:doc", -> log 'compiling docs'
+gulp.task "compile:coffee", coffee [SRC, SPEC, FIXTURE]
+gulp.task "compile:doc", ["compile:coffee"], jsdoc SRC
 
 gulp.task "test:mocha", mocha SPEC
 gulp.task "test:istanbul", ["compile:coffee"], istanbul SPEC
 
-compile = -> gulp.start "compile:coffee", "compile:doc"
+gulp.task "server", ["test:mocha", "test:istanbul", "compile:doc"], server SPEC
+
+compile = -> gulp.start "compile:doc"
 test = -> gulp.start "test:mocha", "test:istanbul" 
 
 gulp.task "test", test
 gulp.task "compile", compile
 
-gulp.task "watch", ["compile", "test"], ->
-  gulp.watch [__filename, "./etc.coffee"], reboot
-  gulp.watch [SRC, SPEC], (evt) -> compile(); test()
+gulp.task "watch", ["compile", "server"], ->
+  gulp.watch ["./gulpfile.coffee", ETC], reboot
+  gulp.watch [SRC, SPEC, FIXTURE], (evt) -> 
 
 gulp.task "default", ["compile", "test"]
