@@ -1,36 +1,41 @@
 ###*
- * @module through
- * @author Marcos GJ 
- * @license MIT
- ###
-
-###*
- * @external Transform
- * @requires module:through2
- * @requires module:lodash.isfunction
- * @requires module:lodash.defaults
- ###
+  * @module through
+  * @author Marcos GJ 
+  * @license MIT
+  ###
 
 through2 = require "through2"
 isFunction = require "lodash.isfunction"
 defaults = require "lodash.defaults"
 
 ###*
- * @global
- * @type Object
- * @default {}
- * @desc default options passed to through2 if none is provided
- ###
+  * @global
+  * @private
+  * @type Object
+  * @desc default options passed to `through2` if none is provided
+  ###
 OPTIONS = {}
 
 ###*
- * @desc A wrapper function around through2 
- * @type Function
- * @param {Object=|Function=} options - Options passed through2 or a transform function (optional)
- * @param {Function=} transform - Transform function (optional)
- * @param {Function=} flush - Flush function (optional)
- * @returns {Transform} - A transform stream
- ###
+  * @external Transform
+  ###
+
+###*
+  * @instance
+
+  * @param {Object=} options
+  * @param {Number=} [options.highWaterMark = 16kb]- The maximum number of bytes to store in the internal buffer before ceasing to read from the underlying resource.
+  * @param {?String=} [options.encoding = null] -  If specified, then buffers will be decoded to strings using the specified encoding.
+  * @param {Boolean=} [options.objectMode = false] - Whether this stream should behave as a stream of objects. Meaning that stream.read(n) returns a single value instead of a Buffer of size n.
+
+  * @param {Function=} transform - Transform function
+  * @param {Function=} flush - Flush function
+
+  * @return {Transform} - A `Transform` stream from `readable-stream` module
+
+  * @desc A wrapper function around through2 
+
+  ###
 through = (options, transform, flush) ->
   if isFunction options
     flush = transform
@@ -44,26 +49,62 @@ through = (options, transform, flush) ->
 
   return through2 options, transform, flush
 
-###*
- * @typedef {Function} Through
- * @property {Function} factory 
- * @property {Function} ctor
- * @property {Function} obj
- ###
+###* 
+  * @static
+  * @type Function
+  * @method
+  * @return {Transform} - A `Transform` stream from `readable-stream` module
+
+  * @desc `ctor` method from through2
+  ###
+ctor = -> through2.ctor.apply @, arguments
 
 ###* 
- * @desc A factory function
- * @type Function
- * @param {Object=} options - Set through default options.
- * @returns {Through}
- ###
+  * @static
+  * @type Function
+  * @return {Transform} - A `Transform` stream from `readable-stream` module
+
+  * @desc `obj` method from through2
+  ###
+obj = -> through2.obj.apply @, arguments
+
+###* 
+  * @static
+  * @type Function
+
+  * @param {Object=} options
+  * @param {Number=} [options.highWaterMark = 16kb]- The maximum number of bytes to store in the internal buffer before ceasing to read from the underlying resource.
+  * @param {?String=} [options.encoding = null] -  If specified, then buffers will be decoded to strings using the specified encoding.
+  * @param {Boolean=} [options.objectMode = false] - Whether this stream should behave as a stream of objects. Meaning that stream.read(n) returns a single value instead of a Buffer of size n.
+
+  * @return {through} - A through function with `options` as default
+
+  * @desc 
+
+  ##\##\## example:
+  ```coffee
+  thrObj = through.factory {objectMode: yes}
+  streamObj = thrObj (file, enc, done) ->
+    expect(file).to.be.equal 'my data'
+
+  streamObj.write 'my data'
+
+  myData = new Buffer 'my data'
+  streamBuf = through (file, enc, done) ->
+    expect(file).to.be.equal myData
+
+  streamObj.write 'data'
+
+  ```
+  ###
 factory = (options = {}) ->
   OPTIONS = options
 
   through.factory = factory
-  through.ctor = through2.ctor
-  through.obj = through2.obj
+  through.ctor = ctor
+  through.obj = obj
 
   return through
+
 
 module.exports = factory()

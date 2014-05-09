@@ -30,7 +30,7 @@ describe "exported value:", ->
 for mode in [bufferMode, objectMode]
   do (mode) ->
     describe mode.desc, ->
-      beforeEach mode.before(through)
+      beforeEach mode.before through
       afterEach mode.after
 
       it "must return an instanceof Transform", ->
