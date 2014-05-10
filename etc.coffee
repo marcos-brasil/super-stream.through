@@ -6,6 +6,7 @@
  ###
 
 path = require "path"
+{readFile, writeFile} = require "fs"
 {exec} = require "child_process"
 {Promise} = require "es6-promise"
 
@@ -20,6 +21,7 @@ express = require "express"
 livereload = require "gulp-livereload"
 tinylr = require "tiny-lr"
 conn = require "connect"
+markdown = require "markdown-middleware"
 
 through = require './through'
 thr = through.obj
@@ -99,7 +101,6 @@ istanbul = (spec) ->
   spec = replaceExtension spec, ".js"
   ->
     cmd = "./node_modules/istanbul/lib/cli.js cover --report html ./node_modules/mocha/bin/_mocha -- #{spec} -R dot -t 1000"
-    log "shell running istanbul"
     
     shell cmd
       .catch (err) ->
@@ -120,12 +121,12 @@ server = (glob) ->
   globs = [glob, "./coverage/index.html", './jsdoc/index.html']
   app = express()
 
-  app.use require('connect-livereload')()
-  app.use '/coverage', express.static(path.resolve './coverage')
-  app.use '/jsdoc', express.static(path.resolve './jsdoc')
   app.use conn.errorHandler {dumpExceptions: true, showStack: true }
+  app.use require('connect-livereload')()
+  app.use '/coverage', express.static path.resolve './coverage'
+  app.use '/jsdoc', express.static path.resolve './jsdoc'
+  app.use markdown {directory: __dirname}
 
-  app.get 
   app.listen 3001, ->
     log bold "express server running on port: #{magenta 3001}"
 
@@ -146,6 +147,72 @@ server = (glob) ->
         log 'LR: reloading....'
         gulp.src evt.path
           .pipe livereload serverLR
+
+### istanbul ignore next ###
+Deferred = () ->
+  @promise = new Promise (resolve, reject) =>
+    @resolve_ = resolve
+    @reject_ = reject
+
+  return @
+
+### istanbul ignore next ###
+Deferred::resolve = -> @resolve_.apply @promise, arguments
+### istanbul ignore next ###
+Deferred::reject = -> @reject_.apply @promise, arguments
+### istanbul ignore next ###
+Deferred::then = -> @promise.then.apply @promise, arguments
+### istanbul ignore next ###
+Deferred::catch = -> @promise.catch.apply @promise, arguments
+
+writeReadme = (str) ->
+  defer = new Deferred()
+
+  readFile './intro.md', {encoding: 'utf8'}, (err, data) ->
+    data = "#{data}\n#{str}"
+    writeFile './README.md', data, (err) ->
+      throw err if err
+      defer.resolve()
+
+  return defer.promise
+
+fixLine = (line) ->
+  line.replace /^[ ]*\* @desc/, ''
+    .replace /^[ ]*\*/, ''
+    .replace /^[ ]/, ''
+
+extractMarkdown = ->
+  thr (f, e, n) ->
+    cache = {}
+    cache.str = []
+    cache.bool = no
+    cache.buf = []
+
+    file = f.contents.toString()
+    file.split('\n').map (line) ->
+
+      if cache.bool and line.match /\* @/
+        cache.bool = no
+
+      if line.match /\*\//
+        cache.bool = no
+        if cache.buf.length
+          cache.str.push cache.buf.join '\n'
+        cache.buf = []
+
+      if line.match /\* @desc/
+        cache.bool = yes
+
+      if cache.bool
+        cache.buf.push fixLine line
+
+    writeReadme cache.str.join '\n'
+      .then -> n null, f
+
+fixMarkdown = ->
+  thr (f,e,n) ->
+    f.contents = new Buffer f.contents.toString().replace(/\\#/g,'#').replace('\*#', '##')
+    n null, f
 
 ###*
  * @type Function
@@ -171,11 +238,12 @@ compileDoc = (src) ->
       parser: 'gfm'
       hardwrap: yes
 
+  # wiring extractMarkdown with writeReadme streams first
   -> 
+
     gulp.src replaceExtension(src, '.js')
-      .pipe through.obj (f,e,n) ->
-        f.contents = new Buffer f.contents.toString().replace(/\\#/g,'#').replace('\*#', '##')
-        n null, f
+      .pipe fixMarkdown()
+      .pipe extractMarkdown()
       .pipe jsdoc.parser config
       .pipe jsdoc.generator 'jsdoc'
 

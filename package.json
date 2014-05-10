@@ -36,6 +36,7 @@
     "gulp-livereload": "^1.5.0",
     "gulp-util": "^2.2.14",
     "istanbul": "^0.2.8",
+    "markdown-middleware": "^0.1.5",
     "mocha": "^1.18.2",
     "readable-stream": "^1.0.27-1",
     "sinon": "^1.9.1",

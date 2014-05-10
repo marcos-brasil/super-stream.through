@@ -17,7 +17,8 @@ defaults = require "lodash.defaults"
   * @param {Function=} flush - `_flush` function as described [here](http://nodejs.org/docs/latest/api/stream.html#stream_class_stream_transform) (same link as above)
   * @return {transformStream} - A instance of `Transform` stream from `readable-stream@1.0.x`
   *
-  * @desc A wrapper function around `through2@0.4.x`
+  * @desc 
+  * ##\# A wrapper function around `through2@0.4.x`
   *
   * ##\##\## example 01:
   * ```javascript
@@ -52,6 +53,7 @@ defaults = require "lodash.defaults"
   *
   * streamA.write(new Buffer('myData'));
   * ```
+  * @pppp
   ###
 through = (cfg) ->
   (options, transform, flush) ->
@@ -75,7 +77,7 @@ through = (cfg) ->
   * @return {Transform} - A pre-configured `Transform` contructor from `readable-stream@1.0.x`
   *
   * @desc 
-  * `ctor` method from `through2@0.4.x`
+  * ##\# `ctor` method from `through2@0.4.x`
   *
   * ##\##\## example:
   * ```javascript
@@ -99,7 +101,7 @@ ctor = (options, transform, flush) -> through2.ctor options, transform, flush
   * @return {transformStream} - A instance of `Transform` stream from `readable-stream@1.0.x`
   *
   * @desc 
-  * `obj` method from `through2@0.4.x`
+  * ##\# `obj` method from `through2@0.4.x`
   *
   * It is a conveniece method for `through({objectMode: true}, transformFn, flushFn);`
   *
@@ -124,7 +126,7 @@ obj = (transform, flush) -> through2.obj transform, flush
   * @return {transformStream} - A instance of `Transform` stream from `readable-stream@1.0.x`
   *
   * @desc 
-  * It is a conveniece method for `through({objectMode: false}, transformFn, flushFn);`
+  * ##\# It is a conveniece method for `through({objectMode: false}, transformFn, flushFn);`
   *
   * ##\##\## example:
   *
@@ -153,7 +155,7 @@ buf = (transform, flush) -> through2 {objectMode: no}, transform, flush
   * @return {through} - A through function with `options` pre-configured as default
   *
   * @desc 
-  * A factory method for creating a custom `through` instance.
+  * ##\# A factory method for creating a custom `through` instance.
   *
   * ##\##\## example 01:
   *
