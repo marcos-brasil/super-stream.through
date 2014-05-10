@@ -15,6 +15,7 @@ SRC = "./through.coffee"
 SPEC = "./spec.coffee"
 FIXTURE = "./fixture.coffee"
 ETC = "./etc.coffee"
+MD = "./intro.md"
 
 gulp.task "compile:coffee", coffee [SRC, SPEC, FIXTURE]
 gulp.task "compile:doc", ["compile:coffee"], jsdoc SRC
@@ -32,6 +33,6 @@ gulp.task "compile", compile
 
 gulp.task "watch", ["compile", "server"], ->
   gulp.watch ["./gulpfile.coffee", ETC], reboot
-  gulp.watch [SRC, SPEC, FIXTURE], (evt) -> compile(); test()
+  gulp.watch [SRC, SPEC, FIXTURE, MD], (evt) -> compile(); test()
 
 gulp.task "default", ["compile", "test"]
