@@ -1,4 +1,32 @@
-###*
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: through.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: through.js</h1>
+
+    
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>
+/**
   * @module through
   * @author Marcos GJ 
   * @license MIT
@@ -18,14 +46,17 @@
   * But if you need some functional style transforms and other stream utilities and reduce your dependencies at the same time, **_this_** is your basic through stream you are looking for.
   * 
   * See also ...
-  ###
+ */
+var buf, ctor, defaults, factory, isFunction, obj, through, through2;
 
-through2 = require "through2"
-isFunction = require "lodash.isfunction"
-defaults = require "lodash.defaults"
+through2 = require("through2");
+
+isFunction = require("lodash.isfunction");
+
+defaults = require("lodash.defaults");
 
 
-###*
+/**
   * @instance
   *
   * @param {Object=} options - Same options as seen [here](/jsdoc/module-through.html#factory)
@@ -71,22 +102,26 @@ defaults = require "lodash.defaults"
   *
   * streamA.write(new Buffer('myData'));
   * ```
-  ###
-through = (cfg) ->
-  (options, transform, flush) ->
-    if isFunction options
-      flush = transform
-      transform = options
-      options = cfg
-    else
-      options = defaults options, cfg
+ */
 
-    if arguments.length is 0
-      options = cfg
+through = function(cfg) {
+  return function(options, transform, flush) {
+    if (isFunction(options)) {
+      flush = transform;
+      transform = options;
+      options = cfg;
+    } else {
+      options = defaults(options, cfg);
+    }
+    if (arguments.length === 0) {
+      options = cfg;
+    }
+    return through2(options, transform, flush);
+  };
+};
 
-    return through2 options, transform, flush
 
-###* 
+/** 
   * @static
   * @param {Object=} options - Same options as seen [here](/jsdoc/module-through.html#factory)
   * @param {Function=} transform - `_transform` function as described [here](http://nodejs.org/docs/latest/api/stream.html#stream_class_stream_transform)
@@ -109,10 +144,14 @@ through = (cfg) ->
   * streamC = Ctor({objectMode: false}); 
   *
   * ```
-  ###
-ctor = (options, transform, flush) -> through2.ctor options, transform, flush
+ */
 
-###* 
+ctor = function(options, transform, flush) {
+  return through2.ctor(options, transform, flush);
+};
+
+
+/** 
   * @static
   * @param {Function=} transform - `_transform` function as described [here](http://nodejs.org/docs/latest/api/stream.html#stream_class_stream_transform)
   * @param {Function=} flush - `_flush` function as described [here](http://nodejs.org/docs/latest/api/stream.html#stream_class_stream_transform) (same link as above)
@@ -132,10 +171,14 @@ ctor = (options, transform, flush) -> through2.ctor options, transform, flush
   * });
   * streamObj.write({data: 'myData'});
   * ```
-  ###
-obj = (transform, flush) -> through2.obj transform, flush
+ */
 
-###* 
+obj = function(transform, flush) {
+  return through2.obj(transform, flush);
+};
+
+
+/** 
   * @static
   * @param {Function=} transform - `_transform` function as described [here](http://nodejs.org/docs/latest/api/stream.html#stream_class_stream_transform)
   * @param {Function=} flush - `_flush` function as described [here](http://nodejs.org/docs/latest/api/stream.html#stream_class_stream_transform) (same link as above)
@@ -158,10 +201,16 @@ obj = (transform, flush) -> through2.obj transform, flush
   * }):
   * streamBuf.write(myData);
   * ```
-  ###
-buf = (transform, flush) -> through2 {objectMode: no}, transform, flush
+ */
 
-###* 
+buf = function(transform, flush) {
+  return through2({
+    objectMode: false
+  }, transform, flush);
+};
+
+
+/** 
   * @static
   *
   * @param {Object=} options - Object passed to `stream.Transfrom` constructor as described [here](http://nodejs.org/docs/latest/api/stream.html#stream_new_stream_readable_options) and [here](http://nodejs.org/docs/latest/api/stream.html#stream_new_stream_duplex_options)
@@ -196,15 +245,42 @@ buf = (transform, flush) -> through2 {objectMode: no}, transform, flush
   * }):
   * streamBuf.write(myData);
   * ```
-  ###
-factory = (cfg = {}) ->
-  fn = through cfg
+ */
 
-  fn.factory = factory
-  fn.ctor = ctor
-  fn.obj = obj
-  fn.buf = buf
+factory = function(cfg) {
+  var fn;
+  if (cfg == null) {
+    cfg = {};
+  }
+  fn = through(cfg);
+  fn.factory = factory;
+  fn.ctor = ctor;
+  fn.obj = obj;
+  fn.buf = buf;
+  return fn;
+};
 
-  return fn
+module.exports = factory();
+</code></pre>
+        </article>
+    </section>
 
-module.exports = factory()
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Index</a></h2><h3>Modules</h3><ul><li><a href="module-through.html">through</a></li></ul>
+</nav>
+
+<br clear="both">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.3.0-alpha5</a> on Sun May 11 2014 14:29:28 GMT-0700 (PDT)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>
