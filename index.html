@@ -38,6 +38,10 @@
 
     
         
+            <div class="description"><h1>Through</h1><!-- [![NPM][NPM1][NPM2]] -->
+
+<!-- [![Build Status][1]][2] [![dependency status][3]][4] [![dev dependency status][5]][6] -->
+
 <h3>A basic wrapper function around <a href="https://github.com/rvagg/through2"><code>through2@0.4.x</code></a></h3><p>This is the base function used by <a href="https://github.com/markuz-gj/super-stream"><code>super-stream</code></a> as a standalone module. Also it is a drop in replacement for <code>through2</code></p>
 <p>Why shouldn't you use <code>through2</code> instead of this module?<br>You wouldn't if all you need is a basic helper for creating <a href="http://nodejs.org/api/stream.html#stream_class_stream_transform"><code>stream.Transform</code></a>.</p>
 <p>But if you need some functional style transforms and other stream utilities and reduce your dependencies at the same time, <strong><em>this</em></strong> is your basic through stream you are looking for.</p>
@@ -119,7 +123,8 @@
 
     
     <div class="description">
-        <h4><em> through.buf([transfromFn], [flushFn]) </em></h4><p>It is a conveniece method for <code>through({objectMode: false}, transformFn, flushFn);</code><br>If called without arguments, returns a passthrough <code>Transform</code> </p>
+        <h4><em> through.buf([transfromFn], [flushFn]) </em></h4><p>It is a conveniece method for <code>through({objectMode: false}, transformFn, flushFn);</code>. 
+</p>
 <pre><code class="lang-javascript">// see the factory method.
 var thr = through.factory({objectMode: true});
 var myData = new Buffer('my data');
@@ -255,7 +260,7 @@ streamBuf.write(myData);
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="through.js.html">through.js</a>, <a href="through.js.html#line179">line 179</a>
+        <a href="through.js.html">through.js</a>, <a href="through.js.html#line180">line 180</a>
     </li></ul></dd>
     
 
@@ -317,7 +322,8 @@ streamBuf.write(myData);
 
     
     <div class="description">
-        <h4><em> through.ctor([options], [transformFn], [flushFn]); </em></h4><p>Note: This is the same <code>ctor</code> method from <code>through2</code><br>If called without arguments, returns a passthrough <code>Transform</code> </p>
+        <h4><em> through.ctor([options], [transformFn], [flushFn]); </em></h4><p>Note: This is the same <code>ctor</code> method from <code>through2</code>.
+</p>
 <pre><code class="lang-javascript">var Ctor = through.ctor({objectMode: true}, transformFn, flushFn);
 streamA = new Ctor();
 
@@ -485,7 +491,7 @@ streamC = Ctor({objectMode: false});
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="through.js.html">through.js</a>, <a href="through.js.html#line122">line 122</a>
+        <a href="through.js.html">through.js</a>, <a href="through.js.html#line123">line 123</a>
     </li></ul></dd>
     
 
@@ -547,7 +553,8 @@ streamC = Ctor({objectMode: false});
 
     
     <div class="description">
-        <h4><em> through.factory([options]); </em></h4><p>A factory method for creating a custom <code>through</code> instance.  </p>
+        <h4><em> through.factory([options]); </em></h4><p>A factory method for creating a custom <code>through</code> instance. 
+</p>
 <pre><code class="lang-javascript">var thrObj = through.factory({objectMode: true});
 
 var streamObj = thrObj(function(string, enc, done){
@@ -845,7 +852,7 @@ streamBuf.write(myData);
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="through.js.html">through.js</a>, <a href="through.js.html#line223">line 223</a>
+        <a href="through.js.html">through.js</a>, <a href="through.js.html#line225">line 225</a>
     </li></ul></dd>
     
 
@@ -907,7 +914,8 @@ streamBuf.write(myData);
 
     
     <div class="description">
-        <h4><em> through.obj([transfromFn], [flushFn]) </em></h4><p>It is a conveniece method for <code>through({objectMode: true}, transformFn, flushFn);</code><br>If called without arguments, returns a passthrough <code>Transform</code> </p>
+        <h4><em> through.obj([transfromFn], [flushFn]) </em></h4><p>It is a conveniece method for <code>through({objectMode: true}, transformFn, flushFn);</code>
+</p>
 <p>Note: This is the same <code>obj</code> method from <code>through2</code></p>
 <pre><code class="lang-javascript">var streamObj = thr.obj(function(string, enc, done){
   expect(string).to.be.deep.equal({data: 'myData'});
@@ -1040,7 +1048,7 @@ streamObj.write({data: 'myData'});
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="through.js.html">through.js</a>, <a href="through.js.html#line149">line 149</a>
+        <a href="through.js.html">through.js</a>, <a href="through.js.html#line150">line 150</a>
     </li></ul></dd>
     
 
@@ -1102,7 +1110,8 @@ streamObj.write({data: 'myData'});
 
     
     <div class="description">
-        <h4>Basic usage:</h4><pre><code class="lang-javascript">var expect = require('chai').expect;
+        <p></p>
+<h6>Basic usage:</h6><pre><code class="lang-javascript">var expect = require('chai').expect;
 
 var streamA = through.obj(function(counter, enc, done){
   counter += 1;
@@ -1292,7 +1301,7 @@ streamA.write(new Buffer('myData'));
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="through.js.html">through.js</a>, <a href="through.js.html#line80">line 80</a>
+        <a href="through.js.html">through.js</a>, <a href="through.js.html#line81">line 81</a>
     </li></ul></dd>
     
 
@@ -1365,7 +1374,7 @@ streamA.write(new Buffer('myData'));
 <br clear="both">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.3.0-alpha5</a> on Sun May 11 2014 14:29:28 GMT-0700 (PDT)
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.3.0-alpha5</a> on Sun May 11 2014 16:18:51 GMT-0700 (PDT)
 </footer>
 
 <script> prettyPrint(); </script>
