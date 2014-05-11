@@ -4,6 +4,7 @@
   * @license MIT
   * @description 
   * # Through
+  * ##\# warning: this is not ready for consuption yet
   * <!-- [![NPM][NPM1][NPM2]] -->
   *
   * <!-- [![Build Status][1]][2] [![dependency status][3]][4] [![dev dependency status][5]][6] -->
