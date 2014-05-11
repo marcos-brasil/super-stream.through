@@ -103,12 +103,16 @@ Deferred = () ->
     @reject_ = reject
 
   return @
+
 ### istanbul ignore next ###
 Deferred::resolve = -> @resolve_.apply @promise, arguments
+
 ### istanbul ignore next ###
 Deferred::reject = -> @reject_.apply @promise, arguments
+
 ### istanbul ignore next ###
 Deferred::then = -> @promise.then.apply @promise, arguments
+
 ### istanbul ignore next ###
 Deferred::catch = -> @promise.catch.apply @promise, arguments
 
