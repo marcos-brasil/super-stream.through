@@ -1,13 +1,13 @@
 
 /**
   * @module through
-  * @author Marcos GJ 
+  * @author Markuz GJ 
   * @license MIT
   * @description 
   * # Through
-  * [![NPM][NPM1][NPM2]]
+  * <!-- [![NPM][NPM1][NPM2]] -->
   *
-  * [![Build Status][1]][2] [![dependency status][3]][4] [![dev dependency status][5]][6]
+  * <!-- [![Build Status][1]][2] [![dependency status][3]][4] [![dev dependency status][5]][6] -->
   * 
   * ##\# A basic wrapper function around [`through2@0.4.x`](https://github.com/rvagg/through2)
   *
