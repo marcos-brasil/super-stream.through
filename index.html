@@ -115,7 +115,7 @@
 
     
     <div class="description">
-        <h4><em> through.buf([transfromFn], [flushFn]) </em></h4><p>It is a conveniece method for <code>through({objectMode: false}, transformFn, flushFn);</code>. 
+        <h4><em> through.buf([transfromFn,] [flushFn]) </em></h4><p>It is a conveniece method for <code>through({objectMode: false}, transformFn, flushFn);</code>. 
 </p>
 <pre><code class="lang-javascript">// see the factory method.
 var thr = through.factory({objectMode: true});
@@ -314,7 +314,7 @@ streamBuf.write(myData);
 
     
     <div class="description">
-        <h4><em> through.ctor([options], [transformFn], [flushFn]); </em></h4><p>Note: This is the same <code>ctor</code> method from <code>through2</code>.
+        <h4><em> through.ctor([options,] [transformFn,] [flushFn]); </em></h4><p>Note: This is the same <code>ctor</code> method from <code>through2</code>.
 </p>
 <pre><code class="lang-javascript">var Ctor = through.ctor({objectMode: true}, transformFn, flushFn);
 streamA = new Ctor();
@@ -906,7 +906,7 @@ streamBuf.write(myData);
 
     
     <div class="description">
-        <h4><em> through.obj([transfromFn], [flushFn]) </em></h4><p>It is a conveniece method for <code>through({objectMode: true}, transformFn, flushFn);</code>
+        <h4><em> through.obj([transfromFn,] [flushFn]) </em></h4><p>It is a conveniece method for <code>through({objectMode: true}, transformFn, flushFn);</code>
 </p>
 <p>Note: This is the same <code>obj</code> method from <code>through2</code></p>
 <pre><code class="lang-javascript">var streamObj = thr.obj(function(string, enc, done){
@@ -1102,8 +1102,10 @@ streamObj.write({data: 'myData'});
 
     
     <div class="description">
-        <p></p>
-<h6>Basic usage:</h6><pre><code class="lang-javascript">var expect = require('chai').expect;
+      <p></p>
+        <h4><em> through.ctor([options,] [transformFn,] [flushFn]); </em></h4>
+
+<pre><code class="lang-javascript">var expect = require('chai').expect;
 
 var streamA = through.obj(function(counter, enc, done){
   counter += 1;
