@@ -1,9 +1,7 @@
 
 # Through
-### warning: this is not ready for consuption yet
-[![NPM](https://nodei.co/npm/super-stream.through.png?compact=true)](https://nodei.co/npm/super-stream.through/)
 
-[![Build Status][1]][2] [![dependency status][3]][4] [![dev dependency status][5]][6]
+[![NPM version](https://badge.fury.io/js/super-stream.through.png)](https://npmjs.org/package/super-stream.through) [![Build Status](https://travis-ci.org/markuz-gj/super-stream.through.png?branch=master)](https://travis-ci.org/markuz-gj/super-stream.through) [![Dependency Status](https://david-dm.org/markuz-gj/super-stream.through.png)](https://david-dm.org/markuz-gj/super-stream.through) [![devDependency Status](https://david-dm.org/markuz-gj/super-stream.through/dev-status.png)](https://david-dm.org/markuz-gj/super-stream.through#info=devDependencies) [![Coverage Status](https://coveralls.io/repos/markuz-gj/super-stream.through/badge.png?branch=master)](https://coveralls.io/r/markuz-gj/super-stream.through?branch=master)
 
 ### A basic wrapper function around [`through2@0.4.x`](https://github.com/rvagg/through2)
 
@@ -126,3 +124,5 @@ var streamBuf = thrBuf(function(chunk, enc, done){
 }):
 streamBuf.write(myData);
 ```
+
+[![NPM](https://nodei.co/npm/super-stream.through.png)](https://nodei.co/npm/super-stream.through/) [![NPM](https://nodei.co/npm-dl/super-stream.through.png)](https://nodei.co/npm/super-stream.through/)
