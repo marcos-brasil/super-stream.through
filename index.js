@@ -15,9 +15,18 @@
   * Why shouldn't you use `through2` instead of this module?  
   * You wouldn't if all you need is a basic helper for creating [`stream.Transform`](http://nodejs.org/api/stream.html#stream_class_stream_transform).
   *
-  * But if you need some functional style transforms and other stream utilities and reduce your dependencies at the same time, **_this_** is your basic through stream you are looking for.
-  * 
-  * See also ...
+  * But if you need some functional style transforms and other stream utilities and reduce your dependencies at the same time, **_this_** is your basic through stream you are looking for. For all the API, go [here](http://markuz-gj.github.io/super-stream.through/)  
+  *
+  * See also.  
+  * [`super-stream`](https://github.com/markuz-gj/super-stream)  
+  * [`super-stream.each`](https://github.com/markuz-gj/super-stream.each)  
+  * [`super-stream.map`](https://github.com/markuz-gj/super-stream.map)  
+  * [`super-stream.reduce`](https://github.com/markuz-gj/super-stream.reduce)  
+  * [`super-stream.filter`](https://github.com/markuz-gj/super-stream.filter)  
+  * [`super-stream.junction`](https://github.com/markuz-gj/super-stream.junction)  
+  * [`super-stream.pipeline`](https://github.com/markuz-gj/super-stream.pipeline)  
+  *
+  * * * *
  */
 var buf, ctor, defaults, factory, isFunction, obj, through, through2;
 
@@ -37,8 +46,7 @@ defaults = require("lodash.defaults");
   * @return {transformStream} - A instance of `Transform` stream from `readable-stream@1.0.x`
   *
   * @desc 
-
-  * ##\## Basic usage:
+  * ##\## _ through([options,] [transformFn,] [flushFn]); _
   *
   * ```javascript
   * var expect = require('chai').expect;
@@ -104,7 +112,7 @@ through = function(cfg) {
   * @return {Transform} - A pre-configured `Transform` contructor from `readable-stream@1.0.x`
   *
   * @desc 
-  * ##\## _ through.ctor([options], [transformFn], [flushFn]); _
+  * ##\## _ through.ctor([options,] [transformFn,] [flushFn]); _
   * Note: This is the same `ctor` method from `through2`  
   * If called without arguments, returns a passthrough `Transform` 
   *
@@ -138,7 +146,7 @@ ctor = function(options, transform, flush) {
   * @return {transformStream} - A instance of `Transform` stream from `readable-stream@1.0.x`
   *
   * @desc 
-  * ##\## _ through.obj([transfromFn], [flushFn]) _
+  * ##\## _ through.obj([transfromFn,] [flushFn]) _
   * It is a conveniece method for `through({objectMode: true}, transformFn, flushFn);`  
   * If called without arguments, returns a passthrough `Transform` 
   *
@@ -165,7 +173,7 @@ obj = function(transform, flush) {
   * @return {transformStream} - A instance of `Transform` stream from `readable-stream@1.0.x`
   *
   * @desc 
-  * ##\## _ through.buf([transfromFn], [flushFn]) _
+  * ##\## _ through.buf([transfromFn,] [flushFn]) _
   * It is a conveniece method for `through({objectMode: false}, transformFn, flushFn);`  
   * If called without arguments, returns a passthrough `Transform` 
   *
