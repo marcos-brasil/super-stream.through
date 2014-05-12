@@ -14,7 +14,7 @@ expect = chai.expect;
 
 chai.config.showDiff = false;
 
-through = require("./through");
+through = require("./index");
 
 _ref = require("./fixture"), bufferMode = _ref.bufferMode, objectMode = _ref.objectMode, Deferred = _ref.Deferred;
 

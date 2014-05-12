@@ -1,4 +1,4 @@
-through = require "./through"
+through = require "./index"
 sinon = require "sinon"
 {Promise} = require "es6-promise"
 

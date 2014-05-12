@@ -1,6 +1,6 @@
 var Deferred, Promise, bufferMode, extendCtx, objectMode, sinon, spy, through;
 
-through = require("./through");
+through = require("./index");
 
 sinon = require("sinon");
 

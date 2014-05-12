@@ -8,10 +8,10 @@ gulp = require "gulp"
 {colors, log, replaceExtension} = require "gulp-util"
 {bold, red} = colors
 
-through = require './through'
+through = require './index.coffee'
 {mocha, istanbul, exit, server, jsdoc, coffee} = require "./etc"
 
-SRC = "./through.coffee"
+SRC = "./index.coffee"
 SPEC = "./spec.coffee"
 FIXTURE = "./fixture.coffee"
 ETC = "./etc.coffee"

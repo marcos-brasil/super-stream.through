@@ -2,7 +2,6 @@
   "name": "super-stream.through",
   "version": "0.0.0",
   "description": "transform through stream",
-  "main": "through.js",
   "scripts": {
     "test": "sh build.sh test"
   },
