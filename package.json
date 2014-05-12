@@ -1,11 +1,11 @@
 {
   "name": "super-stream.through",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "transform through stream",
   "scripts": {
     "pretest": "npm install",
     "test": "mocha -- ./spec.js -R spec -t 1000",
-    "coveralls": "istanbul cover --report lcovonly _mocha -- ./spec.js -R spec -t 1000 && cat ./coverage/lcov.info | coveralls && rm -rf ./coverage",
+    "coveralls": "istanbul cover --report lcovonly _mocha -- ./spec.js -R spec -t 1000",
     "cover": "istanbul cover --report html _mocha -- ./spec.js -R spec -t 1000"
   },
   "keywords": [
@@ -21,7 +21,6 @@
   "dependencies": {
     "lodash.defaults": "^2.4.1",
     "lodash.isfunction": "^2.4.1",
-    "readable-stream": "^1.0.27-1",
     "through2": "^0.4.1"
   },
   "devDependencies": {
