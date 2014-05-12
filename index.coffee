@@ -5,7 +5,7 @@
   * @description 
   * # Through
   * ##\# warning: this is not ready for consuption yet
-  * [![NPM][NPM1][NPM2]]
+  * [![NPM](https://nodei.co/npm/super-stream.through.png?compact=true)](https://nodei.co/npm/super-stream.through/)
   *
   * [![Build Status][1]][2] [![dependency status][3]][4] [![dev dependency status][5]][6]
   * 

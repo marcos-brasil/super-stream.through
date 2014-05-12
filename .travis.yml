@@ -10,7 +10,6 @@ deploy:
   on:
     tags: true
     repo: markuz-gj/super-stream.through
-    branch: master
     node: 0.10
 
 before_script:
