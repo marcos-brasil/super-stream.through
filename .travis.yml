@@ -14,7 +14,7 @@ deploy:
     node: 0.10
 
 before_script:
-  - npm install
+  - rm -rf *.coffee coverage jsdoc build.sh
 
 script:
   - npm run coveralls
