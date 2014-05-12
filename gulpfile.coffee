@@ -22,7 +22,8 @@ gulp.task "compile:doc", ["compile:coffee"], jsdoc SRC
 gulp.task "test:mocha", mocha SPEC
 gulp.task "test:istanbul", ["compile:coffee"], istanbul SPEC
 
-gulp.task "server", ["test:mocha", "test:istanbul", "compile:doc"], server SPEC
+if process.argv[-1..-1][0] is 'watch'
+  gulp.task "server", ["test:mocha", "test:istanbul", "compile:doc"], server SPEC
 
 compile = -> gulp.start "compile:doc"
 test = -> gulp.start "test:mocha", "test:istanbul" 
