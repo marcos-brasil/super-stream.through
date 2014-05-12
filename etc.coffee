@@ -24,7 +24,7 @@ conn = require "connect"
 conn.livereload = require 'connect-livereload'
 conn.markdown = require "markdown-middleware"
 
-through = require './through'
+through = require './index'
 thr = through.obj
 
 ###*
