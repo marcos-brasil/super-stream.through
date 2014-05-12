@@ -3,7 +3,8 @@
   "version": "0.0.0",
   "description": "transform through stream",
   "scripts": {
-    "test": "sh build.sh test"
+    "pretest": "npm install",
+    "test": "./node_modules/istanbul/lib/cli.js cover --report html ./node_modules/mocha/bin/_mocha -- ./spec.js -R spec -t 1000"
   },
   "keywords": [
     "streams",
