@@ -38,6 +38,7 @@ defaults = require "lodash.defaults"
   *
   * ```javascript
   * var expect = require('chai').expect;
+  * var through = require("super-stream.through")
   *
   * var streamA = through.obj(function(counter, enc, done){
   *   counter += 1;
@@ -68,7 +69,8 @@ defaults = require "lodash.defaults"
   *   expect(chunk.toString()).to.be.equal('myData-myData');
   *   done();
   * });
-  *
+  *  
+  * streamA.pipe(streamB);
   * streamA.write(new Buffer('myData'));
   * ```
   ###
@@ -99,14 +101,19 @@ through = (cfg) ->
   * If called without arguments, returns a passthrough `Transform` 
   *
   * ```javascript
+  * var Transform = require('readable-stream').Transform;
   * var Ctor = through.ctor({objectMode: true}, transformFn, flushFn);
-  * streamA = new Ctor();
-  *
+  * var streamA = new Ctor();
+  * 
   * // no need for the new operator
-  * streamB = Ctor(); 
+  * var streamB = Ctor(); 
   *
   * //overriding options
-  * streamC = Ctor({objectMode: false}); 
+  * var streamC = Ctor({objectMode: false}); 
+  *
+  * expect(streamA).to.be.an.instanceof(Transform);
+  * expect(streamB).to.be.an.instanceof(Transform);
+  * expect(streamC).to.be.an.instanceof(Transform);
   *
   * ```
   ###
@@ -126,11 +133,11 @@ ctor = (options, transform, flush) -> through2.ctor options, transform, flush
   * Note: This is the same `obj` method from `through2`
   *
   * ```javascript
-  * var streamObj = thr.obj(function(string, enc, done){
+  * var stream = through.obj(function(string, enc, done){
   *   expect(string).to.be.deep.equal({data: 'myData'});
   *   done();
   * });
-  * streamObj.write({data: 'myData'});
+  * stream.write({data: 'myData'});
   * ```
   ###
 obj = (transform, flush) -> through2.obj transform, flush
@@ -155,7 +162,7 @@ obj = (transform, flush) -> through2.obj transform, flush
   *   expect(chunk).to.be.equal(myData);
   *   expect(chunk).to.not.be.equal('my data');
   *   done();
-  * }):
+  * });
   * streamBuf.write(myData);
   * ```
   ###
@@ -193,7 +200,7 @@ buf = (transform, flush) -> through2 {objectMode: no}, transform, flush
   *   expect(chunk).to.be.equal(myData);
   *   expect(chunk).to.not.be.equal('my data');
   *   done();
-  * }):
+  * });
   * streamBuf.write(myData);
   * ```
   ###

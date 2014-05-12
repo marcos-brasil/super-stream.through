@@ -3,7 +3,6 @@ sinon = require "sinon"
 {Promise} = require "es6-promise"
 
 
-### istanbul ignore next ###
 spy = (stream) ->
   if spy.free.length is 0
     agent = sinon.spy()
@@ -24,7 +23,6 @@ spy = (stream) ->
 spy.free = []
 spy.used = []
 
-### istanbul ignore next ###
 extendCtx = (fn) ->
   @thr = fn.factory @optA
   @thrX = fn.factory @optB
@@ -42,7 +40,6 @@ extendCtx = (fn) ->
   
 bufferMode = 
   desc: 'streams in buffer mode:'
-  ### istanbul ignore next ###
   before: (fn) ->
     ->
       @optA = {}
@@ -63,14 +60,12 @@ bufferMode =
       extendCtx.call @, fn
       return @
 
-  ### istanbul ignore next ###
   after: ->
     for agent in spy.used
       spy.free.push spy.used.pop()
 
 objectMode = 
   desc: 'streams in object mode:'
-  ### istanbul ignore next ###
   before: (fn) ->
     ->
       @optA = {objectMode: yes}
@@ -91,12 +86,10 @@ objectMode =
       extendCtx.call @, fn
       return @
     
-  ### istanbul ignore next ###
   after: ->
     for agent in spy.used
       spy.free.push spy.used.pop()
 
-### istanbul ignore next ###
 Deferred = () ->
   @promise = new Promise (resolve, reject) =>
     @resolve_ = resolve
@@ -104,16 +97,12 @@ Deferred = () ->
 
   return @
 
-### istanbul ignore next ###
 Deferred::resolve = -> @resolve_.apply @promise, arguments
 
-### istanbul ignore next ###
 Deferred::reject = -> @reject_.apply @promise, arguments
 
-### istanbul ignore next ###
 Deferred::then = -> @promise.then.apply @promise, arguments
 
-### istanbul ignore next ###
 Deferred::catch = -> @promise.catch.apply @promise, arguments
 
 module.exports =
