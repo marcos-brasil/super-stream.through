@@ -16,6 +16,8 @@
   *
   * But if you need some functional style transforms and other stream utilities and reduce your dependencies at the same time, **_this_** is your basic through stream you are looking for. For all the API, go [here](http://markuz-gj.github.io/super-stream.through/)  
   *
+  * ##\# Not ready yet.
+  * 
   * See also.  
   * [`super-stream`](https://github.com/markuz-gj/super-stream)  
   * [`super-stream.each`](https://github.com/markuz-gj/super-stream.each)  
@@ -62,7 +64,7 @@ defaults = require "lodash.defaults"
   *   done(null, counter);
   * });
   *
-  * thr = through.factory({objectMode: true});
+  * var thr = through.factory({objectMode: true});
   *
   * streamA.pipe(streamB).pipe(thr(function(counter, enc, done){
   *   expect(counter).to.be.equal(2);
