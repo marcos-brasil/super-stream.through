@@ -1,6 +1,6 @@
 {
   "name": "super-stream.through",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "transform through stream",
   "scripts": {
     "pretest": "npm install",
@@ -37,7 +37,8 @@
     "gulp-livereload": "^1.5.0",
     "gulp-util": "^2.2.14",
     "istanbul": "^0.2.8",
-    "markdown-middleware": "^0.1.5",
+    "lodash.throttle": "^2.4.1",
+    "marked-middleware": "0.0.1",
     "mocha": "^1.18.2",
     "readable-stream": "^1.0.27-1",
     "sinon": "^1.9.1",

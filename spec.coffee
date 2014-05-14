@@ -1,5 +1,4 @@
 {Transform} = require "readable-stream" 
-{Promise} = require "es6-promise"
 
 chai = require "chai"
 sinon = require "sinon"

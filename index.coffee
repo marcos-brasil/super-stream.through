@@ -2,8 +2,8 @@
   * @module through
   * @author Markuz GJ 
   * @license MIT
+  * @readme # Through
   * @description 
-  * # Through
   *
   * [![NPM version](https://badge.fury.io/js/super-stream.through.png)](https://npmjs.org/package/super-stream.through) [![Build Status](https://travis-ci.org/markuz-gj/super-stream.through.png?branch=master)](https://travis-ci.org/markuz-gj/super-stream.through) [![Dependency Status](https://david-dm.org/markuz-gj/super-stream.through.png)](https://david-dm.org/markuz-gj/super-stream.through) [![devDependency Status](https://david-dm.org/markuz-gj/super-stream.through/dev-status.png)](https://david-dm.org/markuz-gj/super-stream.through#info=devDependencies) [![Coverage Status](https://coveralls.io/repos/markuz-gj/super-stream.through/badge.png?branch=master)](https://coveralls.io/r/markuz-gj/super-stream.through?branch=master) [![MIT Licensed](http://img.shields.io/badge/license-MIT-blue.svg)](#license)
   * 
@@ -35,16 +35,21 @@ defaults = require "lodash.defaults"
 
 ###*
   * @instance
-  *
   * @param {Object=} options - Same options as seen [here](/jsdoc/module-through.html#factory)
   * @param {Function=} transform - `_transform` function as described [here](http://nodejs.org/docs/latest/api/stream.html#stream_class_stream_transform)
   * @param {Function=} flush - `_flush` function as described [here](http://nodejs.org/docs/latest/api/stream.html#stream_class_stream_transform) (same link as above)
-  * @return {transformStream} - A instance of `Transform` stream from `readable-stream@1.0.x`
-  *
-  * @desc 
+  * @return {Transform} A instance of `Transform` stream from `readable-stream@1.0.x`
+  * 
+  * @readme 
+  * 
   * ##\## _through([options,] [transformFn,] [flushFn]);_
+  * 
+  * ##\##\# this is how
+  * 
+  * @example
   *
   * ```javascript
+  * 
   * var expect = require('chai').expect;
   * var through = require("super-stream.through")
   *
@@ -62,11 +67,15 @@ defaults = require "lodash.defaults"
   * streamA.pipe(streamB).pipe(thr(function(counter, enc, done){
   *   expect(counter).to.be.equal(2);
   * }));
-  *
+  * 
   * streamA.write(0);
+  * 
   * ```
   *
+  * @example
+  * 
   * ```javascript
+  * 
   * var streamA = through(function(chunk, enc, done){
   *   data = chunk.toString();
   *   done(null, new Buffer(data +'-'+ data));
@@ -80,6 +89,7 @@ defaults = require "lodash.defaults"
   *  
   * streamA.pipe(streamB);
   * streamA.write(new Buffer('myData'));
+  * 
   * ```
   ###
 through = (cfg) ->
@@ -101,13 +111,19 @@ through = (cfg) ->
   * @param {Object=} options - Same options as seen [here](/jsdoc/module-through.html#factory)
   * @param {Function=} transform - `_transform` function as described [here](http://nodejs.org/docs/latest/api/stream.html#stream_class_stream_transform)
   * @param {Function=} flush - `_flush` function as described [here](http://nodejs.org/docs/latest/api/stream.html#stream_class_stream_transform) (same link as above)
-  * @return {Transform} - A pre-configured `Transform` contructor from `readable-stream@1.0.x`
+  * @return {Transform} A pre-configured `Transform` contructor from `readable-stream@1.0.x`
   *
-  * @desc 
+  * @readme 
+  * 
   * ##\## _through.ctor([options,] [transformFn,] [flushFn]);_
+  * 
+  * @description 
+  * 
   * Note: This is the same `ctor` method from `through2`  
   * If called without arguments, returns a passthrough `Transform` 
   *
+  * @example
+  * 
   * ```javascript
   * var Transform = require('readable-stream').Transform;
   * var Ctor = through.ctor({objectMode: true}, transformFn, flushFn);
@@ -131,15 +147,21 @@ ctor = (options, transform, flush) -> through2.ctor options, transform, flush
   * @static
   * @param {Function=} transform - `_transform` function as described [here](http://nodejs.org/docs/latest/api/stream.html#stream_class_stream_transform)
   * @param {Function=} flush - `_flush` function as described [here](http://nodejs.org/docs/latest/api/stream.html#stream_class_stream_transform) (same link as above)
-  * @return {transformStream} - A instance of `Transform` stream from `readable-stream@1.0.x`
+  * @return {Transform} A instance of `Transform` stream from `readable-stream@1.0.x`
   *
-  * @desc 
+  * @readme 
+  * 
   * ##\## _through.obj([transfromFn,] [flushFn])_
+  *
+  * @description 
+  * 
   * It is a conveniece method for `through({objectMode: true}, transformFn, flushFn);`  
   * If called without arguments, returns a passthrough `Transform` 
   *
   * Note: This is the same `obj` method from `through2`
   *
+  * @example
+  * 
   * ```javascript
   * var stream = through.obj(function(string, enc, done){
   *   expect(string).to.be.deep.equal({data: 'myData'});
@@ -154,13 +176,19 @@ obj = (transform, flush) -> through2.obj transform, flush
   * @static
   * @param {Function=} transform - `_transform` function as described [here](http://nodejs.org/docs/latest/api/stream.html#stream_class_stream_transform)
   * @param {Function=} flush - `_flush` function as described [here](http://nodejs.org/docs/latest/api/stream.html#stream_class_stream_transform) (same link as above)
-  * @return {transformStream} - A instance of `Transform` stream from `readable-stream@1.0.x`
+  * @return {Transform} A instance of `Transform` stream from `readable-stream@1.0.x`
   *
-  * @desc 
+  * 
+  * @readme 
+  * 
   * ##\## _through.buf([transfromFn,] [flushFn])_
+  *
+  * @description 
   * It is a conveniece method for `through({objectMode: false}, transformFn, flushFn);`  
   * If called without arguments, returns a passthrough `Transform` 
   *
+  * @example
+  * 
   * ```javascript
   * // see the factory method.
   * var thr = through.factory({objectMode: true});
@@ -184,12 +212,18 @@ buf = (transform, flush) -> through2 {objectMode: no}, transform, flush
   * @param {?String=} [options.encoding = null] -  If specified, then buffers will be decoded to strings using the specified encoding.
   * @param {Boolean=} [options.objectMode = false] - Whether this stream should behave as a stream of objects. Meaning that stream.read(n) returns a single value instead of a Buffer of size n.
   * @param {Boolean=} [options.allowHalfOpen = true] - If set to false, then the stream will automatically end the readable side when the writable side ends and vice versa.
-  * @return {through} - A through function with `options` pre-configured as default
+  * @return {through} A through function with `options` pre-configured as default
   *
-  * @desc 
+  * @readme 
+  * 
   * ##\## _through.factory([options]);_
+  *
+  * @description 
+  * 
   * A factory method for creating a custom `through` instance.  
   *
+  * @example
+  * 
   * ```javascript
   * var thrObj = through.factory({objectMode: true});
   *
@@ -223,8 +257,7 @@ factory = (cfg = {}) ->
   return fn
 
 ###*
-  * README.md's footer
-  * @desc
+  * @description 
   * License
   * ---
   *

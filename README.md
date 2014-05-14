@@ -1,5 +1,5 @@
-
 # Through
+
 
 [![NPM version](https://badge.fury.io/js/super-stream.through.png)](https://npmjs.org/package/super-stream.through) [![Build Status](https://travis-ci.org/markuz-gj/super-stream.through.png?branch=master)](https://travis-ci.org/markuz-gj/super-stream.through) [![Dependency Status](https://david-dm.org/markuz-gj/super-stream.through.png)](https://david-dm.org/markuz-gj/super-stream.through) [![devDependency Status](https://david-dm.org/markuz-gj/super-stream.through/dev-status.png)](https://david-dm.org/markuz-gj/super-stream.through#info=devDependencies) [![Coverage Status](https://coveralls.io/repos/markuz-gj/super-stream.through/badge.png?branch=master)](https://coveralls.io/r/markuz-gj/super-stream.through?branch=master) [![MIT Licensed](http://img.shields.io/badge/license-MIT-blue.svg)](#license)
 
@@ -23,9 +23,15 @@ See also.
 
 * * *
 
+
 #### _through([options,] [transformFn,] [flushFn]);_
 
+##### this is how
+
+
+
 ```javascript
+
 var expect = require('chai').expect;
 var through = require("super-stream.through")
 
@@ -45,9 +51,13 @@ streamA.pipe(streamB).pipe(thr(function(counter, enc, done){
 }));
 
 streamA.write(0);
+
 ```
 
+
+
 ```javascript
+
 var streamA = through(function(chunk, enc, done){
   data = chunk.toString();
   done(null, new Buffer(data +'-'+ data));
@@ -61,11 +71,18 @@ var streamB = thrObj.buf(function(chunk, enc, done){
  
 streamA.pipe(streamB);
 streamA.write(new Buffer('myData'));
+
 ```
 
+
 #### _through.ctor([options,] [transformFn,] [flushFn]);_
+
+
+
 Note: This is the same `ctor` method from `through2`  
 If called without arguments, returns a passthrough `Transform` 
+
+
 
 ```javascript
 var Transform = require('readable-stream').Transform;
@@ -84,11 +101,17 @@ expect(streamC).to.be.an.instanceof(Transform);
 
 ```
 
+
 #### _through.obj([transfromFn,] [flushFn])_
+
+
+
 It is a conveniece method for `through({objectMode: true}, transformFn, flushFn);`  
 If called without arguments, returns a passthrough `Transform` 
 
 Note: This is the same `obj` method from `through2`
+
+
 
 ```javascript
 var stream = through.obj(function(string, enc, done){
@@ -98,9 +121,14 @@ var stream = through.obj(function(string, enc, done){
 stream.write({data: 'myData'});
 ```
 
+
 #### _through.buf([transfromFn,] [flushFn])_
+
+
 It is a conveniece method for `through({objectMode: false}, transformFn, flushFn);`  
 If called without arguments, returns a passthrough `Transform` 
+
+
 
 ```javascript
 // see the factory method.
@@ -115,8 +143,14 @@ var streamBuf = thr.buf(function(chunk, enc, done){
 streamBuf.write(myData);
 ```
 
+
 #### _through.factory([options]);_
+
+
+
 A factory method for creating a custom `through` instance.  
+
+
 
 ```javascript
 var thrObj = through.factory({objectMode: true});

@@ -1,8 +1,6 @@
-var Deferred, Promise, Transform, bufferMode, chai, expect, mode, objectMode, sinon, through, _fn, _i, _len, _ref, _ref1;
+var Deferred, Transform, bufferMode, chai, expect, mode, objectMode, sinon, through, _fn, _i, _len, _ref, _ref1;
 
 Transform = require("readable-stream").Transform;
-
-Promise = require("es6-promise").Promise;
 
 chai = require("chai");
 
