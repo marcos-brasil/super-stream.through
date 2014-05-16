@@ -6,9 +6,12 @@
   * @readme # Through
   * @description 
   *
-  * [![NPM version](https://badge.fury.io/js/super-stream.through.png)](https://npmjs.org/package/super-stream.through) [![Build Status](https://travis-ci.org/markuz-gj/super-stream.through.png?branch=master)](https://travis-ci.org/markuz-gj/super-stream.through) [![Dependency Status](https://david-dm.org/markuz-gj/super-stream.through.png)](https://david-dm.org/markuz-gj/super-stream.through) [![devDependency Status](https://david-dm.org/markuz-gj/super-stream.through/dev-status.png)](https://david-dm.org/markuz-gj/super-stream.through#info=devDependencies) [![Coverage Status](https://coveralls.io/repos/markuz-gj/super-stream.through/badge.png?branch=master)](https://coveralls.io/r/markuz-gj/super-stream.through?branch=master) [![MIT Licensed](http://img.shields.io/badge/license-MIT-blue.svg)](#license)
+  *
+  * [![NPM version](https://badge.fury.io/js/super-stream.through.png)](https://npmjs.org/package/super-stream.through) [![Build Status](https://travis-ci.org/markuz-gj/super-stream.through.png?branch=master)](https://travis-ci.org/markuz-gj/super-stream.through) [![Dependency Status](https://david-dm.org/markuz-gj/super-stream.through.png)](https://david-dm.org/markuz-gj/super-stream.through) [![devDependency Status](https://david-dm.org/markuz-gj/super-stream.through/dev-status.png)](https://david-dm.org/markuz-gj/super-stream.through#info=devDependencies) [![Coverage Status](https://coveralls.io/repos/markuz-gj/super-stream.through/badge.png?branch=master)](https://coveralls.io/r/markuz-gj/super-stream.through?branch=master) [![MIT Licensed](http://img.shields.io/badge/license-MIT-blue.svg)](#license) 
   * 
-  * ##\# A basic wrapper function around [`through2@0.4.x`](https://github.com/rvagg/through2)
+  * <!-- [![endorse](https://api.coderwall.com/markuz-gj/endorsecount.png)](https://coderwall.com/markuz-gj) -->
+  * 
+  * ##\## A basic wrapper function around [`through2@0.4.x`](https://github.com/rvagg/through2)
   *
   * This is the base function used by [`super-stream`](https://github.com/markuz-gj/super-stream) as a standalone module. Also it is a drop in replacement for `through2`
   *
@@ -17,6 +20,8 @@
   *
   * But if you need some functional style transforms and other stream utilities and reduce your dependencies at the same time, **_this_** is your basic through stream you are looking for. For all the API, go [here](http://markuz-gj.github.io/super-stream.through/)  
   *
+  * ##\# Not ready yet.
+  * 
   * See also.  
   * [`super-stream`](https://github.com/markuz-gj/super-stream)  
   * [`super-stream.each`](https://github.com/markuz-gj/super-stream.each)  
@@ -66,7 +71,7 @@ defaults = require("lodash.defaults");
   *   done(null, counter);
   * });
   *
-  * thr = through.factory({objectMode: true});
+  * var thr = through.factory({objectMode: true});
   *
   * streamA.pipe(streamB).pipe(thr(function(counter, enc, done){
   *   expect(counter).to.be.equal(2);
