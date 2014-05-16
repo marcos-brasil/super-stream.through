@@ -18,23 +18,24 @@ gulp.task("test:mocha", etc.mocha(SPEC))
 gulp.task("test:istanbul", etc.istanbul(SPEC))
 gulp.task('compile:docs', etc.jsdoc(SRC))
 
-gulp.task('watch:gulp', function(){
-  gulp.watch([__filename, '../etc-etc/*.js'], etc.exit)
+gulp.task('test', ['test:istanbul'])
+
+gulp.task('watch:etc', function(){
+  gulp.watch([__filename, '../etc-etc/*.{js,coffee}'], etc.exit)
 })
 
 if (process.argv.slice(-1)[0] === 'watch') {
-  // gulp.task("server", ["test:mocha", "compile:docs"], etc.server())
   gulp.task("server", ["test:istanbul", "compile:docs"], etc.server())
 }
 
-gulp.task("watch", ["server", "watch:gulp"], function() {
+gulp.task("watch", ["server", "watch:etc"], function() {
 
   return gulp.watch([SRC, SPEC, FIXTURE], function(evt) {
     if (evt.type !== 'added') {
-      // gulp.start('test:mocha', 'compile:docs')
       gulp.start('test:istanbul', 'compile:docs')
     }
   })
 })
 
-gulp.task("default", ["test:istanbul"])
+
+gulp.task("default", ["test"])

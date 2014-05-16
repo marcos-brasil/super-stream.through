@@ -24,6 +24,7 @@
     "through2": "^0.4.1"
   },
   "devDependencies": {
+    "etc-etc": "git+https://github.com/markuz-gj/etc-etc",
     "chai": "^1.9.1",
     "coffee-script": "^1.7.1",
     "connect": "^2.15.0",
