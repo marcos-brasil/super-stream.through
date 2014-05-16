@@ -9,7 +9,7 @@ chai.use require "sinon-chai"
 expect = chai.expect
 chai.config.showDiff = no
 
-through = require "./index"
+through = require ".."
 {bufferMode, objectMode, Deferred} = require "./fixture"
 
 describe "exported value:", ->
