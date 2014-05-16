@@ -4,9 +4,9 @@
   "description": "transform through stream",
   "scripts": {
     "pretest": "npm install",
-    "test": "mocha -- ./spec.js -R spec -t 1000",
-    "coveralls": "istanbul cover --report lcovonly _mocha -- ./spec.js -R spec -t 1000",
-    "cover": "istanbul cover --report html _mocha -- ./spec.js -R spec -t 1000"
+    "test": "mocha -- ./spec/spec.coffee --compilers coffee:coffee-script/register -R spec -t 1000",
+    "coveralls": "istanbul cover --report lcovonly _mocha -- --compilers coffee:coffee-script/register ./spec/spec.coffee -R spec -t 1000",
+    "cover": "istanbul cover -x spec --report html _mocha -- --compilers coffee:coffee-script/register ./spec.coffee -R spec -t 1000"
   },
   "keywords": [
     "streams",
