@@ -25,17 +25,15 @@ gulp.task('watch:etc', function(){
 })
 
 if (process.argv.slice(-1)[0] === 'watch') {
-  gulp.task("server", ["test:istanbul", "compile:docs"], etc.server())
+  gulp.task("server", ["test", "compile:docs"], etc.server({port: 8080}))
 }
 
 gulp.task("watch", ["server", "watch:etc"], function() {
-
   return gulp.watch([SRC, SPEC, FIXTURE], function(evt) {
     if (evt.type !== 'added') {
-      gulp.start('test:istanbul', 'compile:docs')
+      gulp.start('test', 'compile:docs')
     }
   })
 })
-
 
 gulp.task("default", ["test"])
