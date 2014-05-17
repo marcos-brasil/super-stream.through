@@ -25,7 +25,7 @@ gulp.task('watch:etc', function(){
 })
 
 if (process.argv.slice(-1)[0] === 'watch') {
-  gulp.task("server", ["test", "compile:docs"], etc.server({port: 8080}))
+  gulp.task("server", ["test", "compile:docs"], etc.server({port: 8000}))
 }
 
 gulp.task("watch", ["server", "watch:etc"], function() {
