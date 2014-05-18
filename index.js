@@ -38,14 +38,10 @@
   *
   * * * *
  */
-var buf, ctor, defaults, factory, isFunction, obj, through, through2;
-
-through2 = require("through2");
-
-isFunction = require("lodash.isfunction");
-
-defaults = require("lodash.defaults");
-
+var through2 = require("through2")
+, isFunction = require("lodash.isfunction")
+, defaults = require("lodash.defaults")
+;
 
 /**
   * @instance
@@ -107,8 +103,8 @@ defaults = require("lodash.defaults");
   * ```
  */
 
-through = function(cfg) {
-  return function(options, transform, flush) {
+function mainFactory (cfg) {
+  return function through (options, transform, flush) {
     if (isFunction(options)) {
       flush = transform;
       transform = options;
@@ -119,6 +115,7 @@ through = function(cfg) {
     if (arguments.length === 0) {
       options = cfg;
     }
+
     return through2(options, transform, flush);
   };
 };
@@ -160,9 +157,24 @@ through = function(cfg) {
   * ```
  */
 
-ctor = function(options, transform, flush) {
-  return through2.ctor(options, transform, flush);
-};
+function ctorFactory (cfg) {
+  return function ctor (options, transform, flush) {
+    if (isFunction(options)) {
+      flush = transform;
+      transform = options;
+      options = cfg;
+    } else {
+      options = defaults(options, cfg);
+    }
+    if (arguments.length === 0) {
+      options = cfg;
+    }
+
+    return through2.ctor(options, transform, flush);
+  }
+}
+
+
 
 
 /** 
@@ -193,9 +205,23 @@ ctor = function(options, transform, flush) {
   * ```
  */
 
-obj = function(transform, flush) {
-  return through2.obj(transform, flush);
-};
+function objFactory (cfg) {
+  return function obj (options, transform, flush) {
+    if (isFunction(options)) {
+      flush = transform
+      transform = options
+      options = cfg
+    } else {
+      options = defaults(options, cfg)
+    }
+    if (arguments.length === 0) {
+      options = cfg
+    }
+
+    options.objectMode = true
+    return mainFactory(options)(options, transform, flush)
+  }
+}
 
 
 /** 
@@ -229,11 +255,26 @@ obj = function(transform, flush) {
   * ```
  */
 
-buf = function(transform, flush) {
-  return through2({
-    objectMode: false
-  }, transform, flush);
-};
+
+function bufFactory (cfg) {
+  return function buf (options, transform, flush) {
+    if (isFunction(options)) {
+      flush = transform
+      transform = options
+      options = cfg
+    } else {
+      options = defaults(options, cfg)
+    }
+    if (arguments.length === 0) {
+      options = cfg
+    }
+
+    options.objectMode = false
+    return mainFactory(options)(options, transform, flush)
+  }
+}
+
+
 
 
 /** 
@@ -280,16 +321,15 @@ buf = function(transform, flush) {
  */
 
 factory = function(cfg) {
-  var fn;
-  if (cfg == null) {
-    cfg = {};
-  }
-  fn = through(cfg);
-  fn.factory = factory;
-  fn.ctor = ctor;
-  fn.obj = obj;
-  fn.buf = buf;
-  return fn;
+  var fn
+  ;
+  cfg = cfg || {}
+  fn = mainFactory(cfg)
+  fn.ctor = ctorFactory(cfg)
+  fn.obj = objFactory(cfg)
+  fn.buf = bufFactory(cfg)
+  fn.factory = factory
+  return fn
 };
 
 
